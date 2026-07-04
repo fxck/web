@@ -1,0 +1,21 @@
+{
+  "name": "@fxck/web",
+  "version": "1.0.0",
+  "description": "Server-rendered page listing todos fetched from the api service",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@fxck/contracts": "github:fxck/contracts",
+    "@hono/node-server": "^1.13.7",
+    "hono": "^4.6.14"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.6.3"
+  }
+}

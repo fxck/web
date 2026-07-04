@@ -1,0 +1,22 @@
+zerops:
+  - setup: web
+    build:
+      base: nodejs@22
+      buildCommands:
+        - npm ci
+      deployFiles:
+        - package.json
+        - package-lock.json
+        - src
+        - node_modules
+      cache:
+        - node_modules
+    run:
+      base: nodejs@22
+      ports:
+        - port: 3000
+          httpSupport: true
+      envVariables:
+        API_URL: http://apidev:3000
+        PORT: "3000"
+      start: node src/index.js
