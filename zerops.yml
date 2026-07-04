@@ -1,5 +1,7 @@
 zerops:
-  - setup: web
+  # dev half of the standard pair — buildFromGit clones fxck/web and builds
+  # with this setup (setup name matches the dev hostname `webdev`).
+  - setup: webdev
     build:
       base: nodejs@22
       buildCommands:
@@ -14,5 +16,25 @@ zerops:
           httpSupport: true
       envVariables:
         API_URL: http://apidev:3000
+        PORT: "3000"
+      start: node src/index.js
+  # stage half — receives the dev->stage cross-deploy for prod-like verify.
+  # Points at the api STAGE over the internal network so stage verifies
+  # against stage (setup name matches the stage hostname `webstage`).
+  - setup: webstage
+    build:
+      base: nodejs@22
+      buildCommands:
+        - npm ci
+      deployFiles: [.]
+      cache:
+        - node_modules
+    run:
+      base: nodejs@22
+      ports:
+        - port: 3000
+          httpSupport: true
+      envVariables:
+        API_URL: http://apistage:3000
         PORT: "3000"
       start: node src/index.js
