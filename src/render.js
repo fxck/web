@@ -32,7 +32,8 @@ export function renderPage(todos, error = null) {
           (t) =>
             `<li class="${t.done ? 'done' : 'todo'}">` +
             `<input type="checkbox" disabled ${t.done ? 'checked' : ''}> ` +
-            `${escapeHtml(t.title)}` +
+            `${escapeHtml(t.title)} ` +
+            `<span class="prio prio-${escapeHtml(t.priority)}">${escapeHtml(t.priority)}</span>` +
             `</li>`
         )
         .join('')}</ul>`;
@@ -45,6 +46,10 @@ export function renderPage(todos, error = null) {
   <style>
     body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 3rem auto; }
     li.done { color: #888; text-decoration: line-through; }
+    .prio { font-size: .7rem; text-transform: uppercase; padding: .1rem .4rem; border-radius: .3rem; margin-left: .3rem; }
+    .prio-high { background: #fde2e1; color: #b00; }
+    .prio-medium { background: #fff3d6; color: #8a6d00; }
+    .prio-low { background: #e3f0ff; color: #24538a; }
     .error { color: #b00; }
     footer { margin-top: 2rem; color: #888; font-size: .85rem; }
   </style>
