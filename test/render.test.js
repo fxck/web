@@ -27,3 +27,14 @@ test('renderPage shows an error message when given one', () => {
   assert.match(html, /Could not load todos/);
   assert.match(html, /api responded 502/);
 });
+
+test('renderPage shows the due date when present and omits it when null', () => {
+  const html = renderPage([
+    { id: 1, title: 'has due', done: false, priority: 'low', dueDate: '2026-08-01' },
+    { id: 2, title: 'no due', done: false, priority: 'low', dueDate: null },
+  ]);
+  assert.match(html, /class="due"/);
+  assert.match(html, /due 2026-08-01/);
+  // Only the row with a dueDate should emit a due span.
+  assert.equal((html.match(/class="due"/g) || []).length, 1);
+});

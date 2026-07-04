@@ -34,6 +34,7 @@ export function renderPage(todos, error = null) {
             `<input type="checkbox" disabled ${t.done ? 'checked' : ''}> ` +
             `${escapeHtml(t.title)} ` +
             `<span class="prio prio-${escapeHtml(t.priority)}">${escapeHtml(t.priority)}</span>` +
+            (t.dueDate ? ` <span class="due">due ${escapeHtml(t.dueDate)}</span>` : '') +
             `</li>`
         )
         .join('')}</ul>`;
@@ -50,6 +51,7 @@ export function renderPage(todos, error = null) {
     .prio-high { background: #fde2e1; color: #b00; }
     .prio-medium { background: #fff3d6; color: #8a6d00; }
     .prio-low { background: #e3f0ff; color: #24538a; }
+    .due { font-size: .7rem; color: #555; margin-left: .3rem; }
     .error { color: #b00; }
     footer { margin-top: 2rem; color: #888; font-size: .85rem; }
   </style>
